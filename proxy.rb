@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'sinatra-cross_origin'
+require 'sinatra/cross_origin'
 require 'net/http'
 
 configure do
