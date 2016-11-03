@@ -18,7 +18,7 @@ get "/" do
 end
 
 get "/amway_events/:year/:month" do
-
+  logger.info "REQUEST.ENV: #{request.env}"
   uri = URI::HTTP.build(
       :host => "www.amwaycenter.com",
       :path => "/events/calendar/#{params[:year]}/#{params[:month]}"
