@@ -2,9 +2,10 @@ require 'sinatra'
 require 'sinatra/cross_origin'
 require 'net/http'
 
-set :allow_origin, :any
 
 configure do
+  set :allow_origin, :any
+  set :allow_methods, [ :get, :options ]
   enable :cross_origin
 end
 
