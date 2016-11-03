@@ -2,4 +2,4 @@ ruby '2.2.4'
 
 source 'https://rubygems.org'
 gem 'sinatra'
-gem 'sinatra-cross_origin'
+gem 'sinatra-cross_origin', '0.3.2'
