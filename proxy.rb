@@ -23,5 +23,7 @@ get "/amway_events/:year/:month" do
 end
 
 get "/json_padding_demo" do
+  content_type 'application/javascript', :charset => 'utf-8'
+
   "console.log('here comes the demo...');#{params['callback']}(8, 23, 1974)"
 end
