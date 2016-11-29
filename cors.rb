@@ -2,7 +2,7 @@
 configure do
   set :allow_origin, :any
   set :allow_methods, [ :get, :options ]
-  enable :cross_origin
+  #enable :cross_origin
 end
 
 options "*" do

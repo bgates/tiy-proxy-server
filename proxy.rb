@@ -8,6 +8,7 @@ get "/" do
 end
 
 get "/amway_events/:year/:month" do
+  cross_origin
   uri = URI::HTTP.build(
       :host => "www.amwaycenter.com",
       :path => "/events/calendar/#{params[:year]}/#{params[:month]}"
@@ -19,4 +20,8 @@ get "/amway_events/:year/:month" do
   logger.info "HEADERS IS #{headers}"
   response
   # returns array of event objects {Title, StartDateTime, EndDateTime}
+end
+
+get "/json_padding_demo" do
+  "console.log('here comes the demo...');#{params['callback']}(8, 23, 1974)"
 end
