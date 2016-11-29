@@ -25,5 +25,8 @@ end
 get "/json_padding_demo" do
   content_type 'application/javascript', :charset => 'utf-8'
 
-  "console.log('here comes the demo...');#{params['callback']}(8, 23, 1974)"
+  "console.log('here comes the demo...');
+  #{params['callback']}({ \"data\": { \"month\": \"August\",
+                                      \"day\": 23,
+                                      \"year\": 1974 } })"
 end
