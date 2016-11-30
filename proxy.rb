@@ -30,3 +30,16 @@ get "/json_padding_demo" do
                                       \"day\": 23,
                                       \"year\": 1974 } })"
 end
+
+get "/darksky/*" do
+  cross_origin
+  uri = URI::HTTP.build(
+      :host => "api.darksky.net",
+      :path => params["splat"],
+      :port => 443
+  )
+
+  content_type 'application/json', :charset => 'utf-8'
+
+  response = Net::HTTP.get(uri)
+end
