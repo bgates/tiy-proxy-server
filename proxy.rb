@@ -54,6 +54,7 @@ end
 get "/items" do
   cross_origin
   items = Item.all
+  content_type 'application/json', :charset => 'utf-8'
   { items: items }.to_json
 end
 
