@@ -43,6 +43,7 @@ end
 
 post "/items" do
   cross_origin
+  content_type 'application/json', :charset => 'utf-8'
   @item = Item.new(params[:item])
   if @item.save
     @item.to_json
@@ -66,6 +67,7 @@ end
 
 delete "/items/:id" do
   cross_origin
+  content_type 'application/json', :charset => 'utf-8'
   item = Item.find(params[:id])
   item.destroy
   item.to_json
