@@ -33,12 +33,18 @@ end
 
 get "/darksky/*" do
   cross_origin
+  logger.info "got past cross_origin"
   uri = URI("https://api.darksky.net/#{params['splat']}")
-
+  logger.info "uri is #{uri}"
   content_type 'application/json', :charset => 'utf-8'
+  logger.info "content_type check"
   Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+    logger.info "in the block"
     request = Net::HTTP::Get.new uri
+    logger.info "request is #{request}"
     response = http.request request # Net::HTTPResponse object
+    logger.info "fn response is #{response}"
   end
+  logger.info "out of block, response is #{response}"
   response
 end
