@@ -33,13 +33,12 @@ end
 
 get "/darksky/*" do
   cross_origin
-  uri = URI::HTTP.build(
-      :host => "api.darksky.net",
-      :path => params["splat"],
-      :port => 443
-  )
+  uri = URI("https://api.darksky.net/#{params['splat']}")
 
   content_type 'application/json', :charset => 'utf-8'
-
-  response = Net::HTTP.get(uri)
+  Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+    request = Net::HTTP::Get.new uri
+    response = http.request request # Net::HTTPResponse object
+  end
+  response
 end
