@@ -4,6 +4,7 @@ require 'sinatra/activerecord'
 require './config/environments'
 require './cors'
 require './models/item'
+require './models/message'
 require 'net/http'
 
 get "/" do
