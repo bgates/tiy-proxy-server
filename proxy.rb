@@ -7,18 +7,22 @@ require './models/item'
 require './models/message'
 require 'net/http'
 
+def allow_json
+  cross_origin
+  content_type 'application/json', :charset => 'utf-8'
+end
+
 get "/" do
   "hello world"
 end
 
 get "/amway_events/:year/:month" do
-  cross_origin
+  allow_json
   uri = URI::HTTP.build(
       :host => "www.amwaycenter.com",
       :path => "/events/calendar/#{params[:year]}/#{params[:month]}"
   )
 
-  content_type 'application/json', :charset => 'utf-8'
 
   response = Net::HTTP.get(uri)
   response
@@ -34,17 +38,15 @@ get "/json_padding_demo" do
 end
 
 get "/darksky/*" do
-  cross_origin
+  allow_json
   uri = URI("https://api.darksky.net/#{params['splat'][0]}")
-  content_type 'application/json', :charset => 'utf-8'
 
   response = Net::HTTP.get uri
   response
 end
 
 post "/items" do
-  cross_origin
-  content_type 'application/json', :charset => 'utf-8'
+  allow_json
   @item = Item.new(params[:item])
   if @item.save
     @item.to_json
@@ -54,32 +56,32 @@ post "/items" do
 end
 
 get "/items" do
-  cross_origin
+  allow_json
   items = Item.all
-  content_type 'application/json', :charset => 'utf-8'
   { items: items }.to_json
 end
 
 get "/items/:id" do
-  cross_origin
+  allow_json
   item = Item.find(params[:id])
   item.to_json
 end
 
 delete "/items/:id" do
-  cross_origin
-  content_type 'application/json', :charset => 'utf-8'
+  allow_json
   item = Item.find(params[:id])
   item.destroy
   item.to_json
 end
 
 get "/messages" do
-  if Message.all.length == 0
-    Message.create(username: "Brian", text: "Off to a good start!")
-  end
-  cross_origin
+  allow_json
   messages = Message.all
-  content_type 'application/json', :charset => 'utf-8'
   { messages: messages }.to_json
+end
+
+post "/messages" do
+  allow_json
+  message = Message.create(params[:message])
+  { message: message }.to_json
 end
