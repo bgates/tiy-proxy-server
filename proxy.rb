@@ -34,7 +34,7 @@ end
 get "/darksky/*" do
   cross_origin
   logger.info "got past cross_origin"
-  uri = URI("https://api.darksky.net/#{params['splat']}")
+  uri = URI("https://api.darksky.net/#{params['splat'][0]}")
   logger.info "uri is #{uri}"
   content_type 'application/json', :charset => 'utf-8'
   logger.info "content_type check"
