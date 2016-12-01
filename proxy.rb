@@ -73,3 +73,13 @@ delete "/items/:id" do
   item.destroy
   item.to_json
 end
+
+get "/messages" do
+  if Message.all.length == 0
+    Message.create(username: "Brian", text: "Off to a good start!")
+  end
+  cross_origin
+  messages = Message.all
+  content_type 'application/json', :charset => 'utf-8'
+  { messages: messages }.to_json
+end
