@@ -36,11 +36,7 @@ get "/darksky/*" do
   uri = URI("https://api.darksky.net/#{params['splat'][0]}")
   content_type 'application/json', :charset => 'utf-8'
 
-  Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-    request = Net::HTTP::Get.new uri
-    response = http.request request # Net::HTTPResponse object
-    logger.info "fn response is #{response}"
-  end
+  response = Net::HTTP.get uri
   logger.info "out of block, response is #{response}"
-  response.class
+  response
 end
