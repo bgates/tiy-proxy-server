@@ -85,3 +85,10 @@ post "/messages" do
   message = Message.create(params[:message])
   { message: message }.to_json
 end
+
+delete "/messages/:id" do
+  allow_json
+  message = Message.find(params[:id])
+  message.destroy
+  { message: message }.to_json
+end
