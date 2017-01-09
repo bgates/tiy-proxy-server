@@ -6,7 +6,7 @@ require './cors'
 require './models/item'
 require './models/message'
 require 'net/http'
-
+# start with bundle exec rackup -p 4567
 def allow_json
   cross_origin
   content_type 'application/json', :charset => 'utf-8'
@@ -43,6 +43,26 @@ get "/darksky/*" do
 
   response = Net::HTTP.get uri
   response
+end
+
+get "/trivia" do
+  allow_json
+  uri = URI("http://trivia.propernerd.com/api/questions?#{request.query_string}")
+  puts uri.inspect
+
+  http = Net::HTTP.new(uri.host, uri.port)
+  request = Net::HTTP::Get.new(uri)
+  puts request.inspect
+
+  user  = '2298623c5e504c94828de0519d5ae973e8289f36'
+  password  = '504ffbd0aa78df6107f428078dfbc1f976ae026b'
+  request.basic_auth user, password
+
+  #response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+    response = http.request(request)
+  #end
+  puts response.inspect
+  response.body
 end
 
 post "/items" do

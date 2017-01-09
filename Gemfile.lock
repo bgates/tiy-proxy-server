@@ -39,6 +39,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   pg
+  rack (< 2.0)
   sinatra
   sinatra-activerecord
   sinatra-cross_origin (= 0.3.2)
