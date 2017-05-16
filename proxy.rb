@@ -65,6 +65,14 @@ get "/trivia" do
   response.body
 end
 
+get "/disney/*" do
+  allow_json
+  uri = URI("http://touringplans.com/#{params['splat'][0]}")
+
+  response = Net::HTTP.get uri
+  response
+end
+
 post "/items" do
   allow_json
   @item = Item.new(params[:item])
