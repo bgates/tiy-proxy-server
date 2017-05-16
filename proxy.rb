@@ -67,7 +67,7 @@ end
 
 get "/disney/*" do
   allow_json
-  uri = URI("http://touringplans.com/#{params['splat'][0]}")
+  uri = URI("https://touringplans.com/#{params['splat'][0]}")
 
   response = Net::HTTP.get uri
   response
