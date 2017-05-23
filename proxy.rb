@@ -75,8 +75,7 @@ end
 
 get "/eventful" do 
   allow_json
-  etc = "app_key=#{params['app_key']}&where=#{params['where']}&within=25"
-  uri = URI("http://api.eventful.com/json/events/search?#{etc}")
+  uri = URI("http://api.eventful.com/json/events/search?#{request.query_string}")
   response = Net::HTTP.get uri
 end
 
