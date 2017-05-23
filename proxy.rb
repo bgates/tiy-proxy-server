@@ -73,6 +73,13 @@ get "/disney/*" do
   response
 end
 
+get "/eventful" do 
+  allow_json
+  etc = "app_key=#{params['app_key']}&where=#{params['where']}&within=25"
+  uri = URI("http://api.eventful.com/json/events/search?#{etc}")
+  response = Net::HTTP.get uri
+end
+
 post "/items" do
   allow_json
   @item = Item.new(params[:item])
